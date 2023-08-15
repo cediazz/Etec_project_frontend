@@ -9,7 +9,7 @@ import Button from 'react-bootstrap/Button';
 import ChartYear from '../Chart/ChartYear';
 import Alert from 'react-bootstrap/Alert';
 import { useRef } from 'react';
-import { PDFExport} from '@progress/kendo-react-pdf';
+import { PDFExport } from '@progress/kendo-react-pdf';
 import { Container } from 'react-bootstrap';
 import SideBar from '../Sidebar/Sidebar'
 import { useNavigate } from 'react-router-dom';
@@ -27,7 +27,7 @@ export default function TrendControlByYear() {
   const navigate = useNavigate();
   const pdfExportComponent = useRef(null)
 
-  const handleExportWithComponent = (event) =>{
+  const handleExportWithComponent = (event) => {
     pdfExportComponent.current.save()
   }
 
@@ -43,65 +43,65 @@ export default function TrendControlByYear() {
     }
     else {
       setLoading(true)
-      
-        let data = await getIncomesByYear(year1,year2)
-        if (data.length)
-            setData(data)
-          else setMessage(data.message)
-          setLoading(false)
-          setError(null)
-        
-      
+
+      let data = await getIncomesByYear(year1, year2)
+      if (data.length)
+        setData(data)
+      else setMessage(data.message)
+      setLoading(false)
+      setError(null)
+
+
     }
   }
 
-return (
+  return (
     <>
-      {localStorage.getItem('access')?
-      <Container fluid >
-      <Row>
-      <Col md={3} className="p-0"><SideBar></SideBar></Col>
-      <Col md={9}> 
-      <Row className="mt-5 justify-content-md-center">
-              <Form noValidate validated={validated} onSubmit={handleSubmit}>
-                <Row className="mb-3" >
-                 <Form.Group className='p-2' as={Col} md="4" controlId="validationCustom01">
-                 <Form.Label >Período de Búsqueda Desde:</Form.Label>
-                    <Form.Control required  max={year2}  type="number" pattern='[0-9]{4}' onChange={e => setYear1(e.target.value)} />
-                    <Form.Control.Feedback type="invalid">
-                      seleccione un año valido
-                    </Form.Control.Feedback>
-                  </Form.Group>
-                <Form.Group className='p-2' as={Col} md="4" controlId="validationCustom02">
-                  <Form.Label >Hasta:</Form.Label>
-                 
-                   <Form.Control required min={year1} type="number" pattern='[0-9]{4}' onChange={e => setYear2(e.target.value)} />
-                   <Form.Control.Feedback type="invalid">
-                       seleccione un año valido
+      {localStorage.getItem('access') ?
+        <Container fluid >
+          <Row>
+            <Col md={3} className="p-0"><SideBar></SideBar></Col>
+            <Col md={9}>
+              <Row className="mt-5 justify-content-md-center">
+                <Form noValidate validated={validated} onSubmit={handleSubmit}>
+                  <Row className="mb-3" >
+                    <Form.Group className='p-2' as={Col} md="4" controlId="validationCustom01">
+                      <Form.Label >Período de Búsqueda Desde:</Form.Label>
+                      <Form.Control required max={year2} type="number" pattern='[0-9]{4}' onChange={e => setYear1(e.target.value)} />
+                      <Form.Control.Feedback type="invalid">
+                        seleccione un año valido
                       </Form.Control.Feedback>
-                </Form.Group>
-                  <Form.Group className='p-2' as={Col} md="4" >
-                    <Button variant="primary" style={{position:"relative",top:30,}} type="submit">Buscar</Button>
-                  </Form.Group>
-                  <Form.Group className='p-2' as={Col} md="4" >
-                  {data && <Button variant="primary" onClick={handleExportWithComponent}>Exportar a PDF</Button>}
-                  </Form.Group>
-                </Row>
+                    </Form.Group>
+                    <Form.Group className='p-2' as={Col} md="4" controlId="validationCustom02">
+                      <Form.Label >Hasta:</Form.Label>
 
-              </Form>
-        </Row>
-            {error && <MyALert message={error}></MyALert>}
-            <div style={{ textAlign: "center" }}>{loading && <Loading></Loading>}</div>
-            {message && <Alert variant="danger" className="d-none d-lg-block">{message}</Alert>}
-            {data && 
-            <PDFExport ref={pdfExportComponent} fileName="Ingresos Anuales.pdf" >
-             <h3>Ingresos Anuales</h3>
-             <ChartYear data={data} ></ChartYear>
-            </PDFExport>
-            }
-      </Col>
-      </Row>
-      </Container> : navigate('/Login')}
-      </>
+                      <Form.Control required min={year1} type="number" pattern='[0-9]{4}' onChange={e => setYear2(e.target.value)} />
+                      <Form.Control.Feedback type="invalid">
+                        seleccione un año valido
+                      </Form.Control.Feedback>
+                    </Form.Group>
+                    <Form.Group className='p-2' as={Col} md="4" >
+                      <Button variant="primary" style={{ position: "relative", top: 30, }} type="submit">Buscar</Button>
+                    </Form.Group>
+                    <Form.Group className='p-2' as={Col} md="4" >
+                      {data && <Button variant="primary" onClick={handleExportWithComponent}>Exportar a PDF</Button>}
+                    </Form.Group>
+                  </Row>
+
+                </Form>
+              </Row>
+              {error && <MyALert message={error}></MyALert>}
+              <div style={{ textAlign: "center" }}>{loading && <Loading></Loading>}</div>
+              {message && <Alert variant="danger" className="d-none d-lg-block">{message}</Alert>}
+              {data &&
+                <PDFExport ref={pdfExportComponent} fileName="Ingresos Anuales.pdf" >
+                  <h3>Ingresos Anuales</h3>
+                  <ChartYear data={data} ></ChartYear>
+                </PDFExport>
+              }
+            </Col>
+          </Row>
+        </Container> : navigate('/Login')}
+    </>
   );
 }

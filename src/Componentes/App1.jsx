@@ -7,7 +7,6 @@ import TrendControlByMonth from './TrendControlByMonth/TrendControlByMonth'
 import TrendControlByYear from './TrendControlByYear/TrendControlByYear'
 import Sidebar from './Sidebar/Sidebar';
 import Signin from './Login/Signin'
-import MyPagination from './Pagination/Pagination'
 
 
 
@@ -23,8 +22,7 @@ function App1(props) {
                     <Route  path="trendControlByMonth" element={<TrendControlByMonth />} />
                     <Route  path="trendControlByYear" element={<TrendControlByYear />} />
                     <Route  path="Login" element={<Signin />} />
-                   
-            </Routes>
+                </Routes>
             </BrowserRouter>
         </ContextUser>
     )

@@ -1,5 +1,5 @@
 import React from 'react';
-import { MDBIcon, MDBTable, MDBTableHead, MDBTableBody } from 'mdb-react-ui-kit';
+import { MDBTable, MDBTableHead, MDBTableBody } from 'mdb-react-ui-kit';
 
 export default function Table(props) {
   return (

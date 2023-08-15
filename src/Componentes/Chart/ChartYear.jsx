@@ -10,7 +10,7 @@ import {
     Filler 
 } from "chart.js";
 import { Line } from "react-chartjs-2";
-import {format} from 'date-fns'
+
 
 export default function ChartYear(props){
 
@@ -28,7 +28,7 @@ export default function ChartYear(props){
     var total_collected = []
     var total_real = []
     
-    props.data.map((e) =>{
+    props.data.map((e) => {
         years.push(e.year)
         total_collected.push(e.total_collected)
         total_real.push(e.total_real)

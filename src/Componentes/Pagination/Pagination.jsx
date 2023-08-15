@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import './mypagination.css';
 import ReactPaginate from 'react-paginate';
 import getCommercialOperations from '../RateControl/getCommercialOperations'
 
 function MyPagination(props) {
-    const [activePage, setActivePage] = useState(0);
+    
    
 
     const handlePageChange = async (event) => {

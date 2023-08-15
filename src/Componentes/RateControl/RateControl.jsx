@@ -7,7 +7,6 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import MyALert from '../Alerts/Alerts'
 import Button from 'react-bootstrap/Button';
-import Signin from '../Login/Signin';
 import { useNavigate } from 'react-router-dom';
 import SideBar from '../Sidebar/Sidebar'
 import { Container } from 'react-bootstrap';
@@ -21,22 +20,18 @@ export default function RateControl() {
   const [data, setData] = useState()
   const [provinces, setProvinces] = useState([])
   const [loading, setLoading] = useState(false)
-  const [error, setError] = useState(null)
-  const [pageSelected, setPageSelected] = useState(1);
   const [dateSelected, setDateSelected] = useState();
   const [provinceSelected, setprovinceSelected] = useState();
   const [pageCount, setPageCount] = useState(0);
   const [message, setMessage] = useState();
   const [validated, setValidated] = useState(false);
   const navigate = useNavigate();
-  const [authorized, setAuthorized] = useState(true)
+  
   const itemsPerPage = 2;
 
   const handleSubmit = async (event) => {
     event.preventDefault()
     setData()
-    setPageSelected(1)
-    //console.log(pageSelected)
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
 
@@ -54,7 +49,7 @@ export default function RateControl() {
       }
       else setMessage("No se econtraron resultados")
       setLoading(false)
-      setError(null)
+      
 
     }
   }
