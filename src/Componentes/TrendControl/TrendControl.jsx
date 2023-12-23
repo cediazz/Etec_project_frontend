@@ -93,6 +93,7 @@ export default function TrendControl() {
               </Row>
               {error && <MyALert message={error}></MyALert>}
               {data.message && <MyALert message={data.message}></MyALert>}
+              {data.detail && <MyALert message={data.detail}></MyALert>}
               <div style={{ textAlign: "center" }}>{loading && <Loading></Loading>}</div>
               {data.by_day &&
                 <PDFExport ref={pdfExportComponent} fileName="Ingresos Diarios.pdf" >

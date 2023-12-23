@@ -20,7 +20,7 @@ export default function Table(props) {
         </tr>
       </MDBTableHead>
       <MDBTableBody>
-        {props.data.map((e) =>
+        {props.data && props.data.map((e) =>
         <tr>
           <td>{e.commercial_office.office_name}</td>
           <td>{e.commercial_office.office_province}</td>

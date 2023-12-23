@@ -45,7 +45,7 @@ export default function TrendControlByMonth() {
       let data = await getIncomesByMonth(year)
       if (data.length)
         setData(data)
-      else setMessage(data.message)
+      else setMessage(data)
       setLoading(false)
       setError(null)
     }
@@ -82,7 +82,11 @@ export default function TrendControlByMonth() {
               </Row>
               {error && <MyALert message={error}></MyALert>}
               <div style={{ textAlign: "center" }}>{loading && <Loading></Loading>}</div>
-              {message && <Alert variant="danger" className="d-none d-lg-block">{message}</Alert>}
+              {message && 
+              <Alert variant="danger" className="d-none d-lg-block">
+                {message.message ? message.message : message.detail}
+                </Alert>
+              }
               {data &&
                 <PDFExport ref={pdfExportComponent} fileName="Ingresos Mensuales.pdf" >
                   <h3>Ingresos Mensuales {year}</h3>

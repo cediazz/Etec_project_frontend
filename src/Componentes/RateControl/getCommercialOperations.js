@@ -35,6 +35,7 @@ export default async function getCommercialOperations(date,province,page=1){
         config.headers.Authorization = `Bearer ${newTokenAcces.access}`
         let res2 = await fetch(`http://localhost:8000/reportes/CommercialOperations/?date=${date}&commercial_office__office_province=${province}&page=${page}`, config)
         data = await res2.json()
+        console.log(data)
          }
       }
       } catch (error) {

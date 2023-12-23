@@ -42,12 +42,16 @@ export default function RateControl() {
       setLoading(true)
       let data = await getCommercialOperations(dateSelected, provinceSelected)
       setLoading(false)
-      if (data.count != 0) {
+      if (data.detail) 
+      setMessage(data.detail)
+      else  if (data.count != 0) {
         setData(data)
         setMessage()
         setPageCount(Math.ceil(data.count / itemsPerPage))
       }
-      else setMessage("No se econtraron resultados")
+      else setMessage("No se encontraron resultados")
+     
+     
       setLoading(false)
       
 
@@ -74,16 +78,18 @@ export default function RateControl() {
 
             <Col md={9}>
               <Row className="mt-5 justify-content-md-center">
-                <Form noValidate validated={validated} onSubmit={handleSubmit} >
+                <Form noValidate  validated={validated} onSubmit={handleSubmit} >
+                 
                   <Row className="mb-3" >
-                    <Form.Label>Escoga una fecha</Form.Label>
                     <Form.Group className='p-2' as={Col} md="4" controlId="validationCustom01">
+                    <Form.Label>Escoga una fecha</Form.Label>
                       <Form.Control required type="date" onChange={e => setDateSelected(e.target.value)} />
                       <Form.Control.Feedback type="invalid">
                         Por favor seleccione una fecha
                       </Form.Control.Feedback>
                     </Form.Group>
                     <Form.Group className='p-2' as={Col} md="4" controlId="validationCustom02">
+                    <Form.Label>Provincia</Form.Label>
                       <Form.Select required onChange={e => setprovinceSelected(e.target.value)} >
                         <option selected disabled value="">Seleccione la Provincia </option>
                         {provinces.map((index) => <option >{index.office_province}</option>)}
@@ -92,7 +98,7 @@ export default function RateControl() {
                         Por favor seleccione una Provincia
                       </Form.Control.Feedback>
                     </Form.Group>
-                    <Form.Group className='p-2' as={Col} md="4" >
+                    <Form.Group className='mt-4 pt-3' as={Col} md="4" >
                       <Button variant="primary" type="submit">Buscar</Button>
                     </Form.Group>
                   </Row>
@@ -101,7 +107,7 @@ export default function RateControl() {
               </Row>
               <Row><div className='mb-4' style={{ textAlign: "center" }}>{loading && <Loading></Loading>}</div></Row>
 
-              {data &&
+              {data  &&
                 <>
                   <Row>
                     <Form.Group as={Col} md="1">
@@ -112,12 +118,13 @@ export default function RateControl() {
                     </Form.Group>
                   </Row>
                   <Row className="mt-3">
-                    <Table data={data.results}></Table>
+                     <Table data={data.results}></Table>
                   </Row>
                 </>
               }
             </Col>
           </Row>
+          {data && data.detail}
         </Container>
         : navigate('/Login')}</div>
 

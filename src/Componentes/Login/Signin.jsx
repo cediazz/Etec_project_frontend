@@ -1,19 +1,17 @@
 import React, { useState } from 'react';
 import { MDBContainer, MDBCol, MDBRow} from 'mdb-react-ui-kit';
-import { EstadoUsersGlobal } from '../Context/StateUsersGlobals'
 import Loading from '../Loading/Loading';
 import MyALert from '../Alerts/Alerts';
 import { useNavigate } from "react-router-dom"
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-
+import login2 from './login2.png'
 
 function Signin() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const userContext = React.useContext(EstadoUsersGlobal)
   const [message, setMessage] = useState()
   const [validated, setValidated] = useState(false);
   const navigate = useNavigate()
@@ -54,7 +52,7 @@ function Signin() {
           localStorage.setItem('username', data.username)
           localStorage.setItem('firstname', data.first_name) // guardar user y token en el Navegador
           //console.log(JSON.parse(localStorage.getItem('user')).token) //si queremos obtener el token del usuario
-          userContext.setData(data.username)
+          
           setLoading(false)
 
 
@@ -81,7 +79,7 @@ function Signin() {
         <MDBContainer className="p-3 my-5">
           <MDBRow>
             <MDBCol col='10' md='6'>
-              <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg" class="img-fluid" alt="Phone image" />
+              <img src={login2} class="img-fluid" alt="Phone image" />
             </MDBCol>
             <MDBCol col='4' md='6'>
               <Form noValidate validated={validated} onSubmit={onSubmit}>

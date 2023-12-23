@@ -1,4 +1,4 @@
-export default async function getCommercialOfficeProvince(){
+export default async function ProcessInformation(){
    
     let token = localStorage.getItem('access') ? localStorage.getItem('access') : ''
     let data = null
@@ -11,7 +11,7 @@ export default async function getCommercialOfficeProvince(){
             'Authorization': `Bearer ${token}`
           }
         }
-        let res = await fetch(`http://127.0.0.1:8000/nomencladores/CommercialOfficeProvinces/`, config)
+        let res = await fetch(`http://127.0.0.1:8000/gestionar-informacion/`, config)
         data = await res.json()
         console.log(data)
         if(res.status == 401){
@@ -33,8 +33,9 @@ export default async function getCommercialOfficeProvince(){
           console.log(newTokenAcces)
           localStorage.setItem('access',newTokenAcces.access);
           config.headers.Authorization = `Bearer ${newTokenAcces.access}`
-          let res2 = await fetch(`http://127.0.0.1:8000/nomencladores/CommercialOfficeProvinces/`, config)
+          let res2 = await fetch(`http://127.0.0.1:8000/gestionar-informacion/`, config)
           data = await res2.json()
+          console.log(data)
            }
         }
         } catch (error) {

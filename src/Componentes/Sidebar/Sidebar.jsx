@@ -9,13 +9,13 @@ import Button from 'react-bootstrap/Button';
 import Loading from '../Loading/Loading'
 import MyModal from '../Modal/Modal'
 import { useNavigate } from 'react-router-dom';
-import {EstadoUsersGlobal} from '../Context/StateUsersGlobals'
+import ProcessInformation from './ProcessInformation';
 
 function Sidebar() {
     const [message, setMessage] = useState()
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate();
-    const userContext = React.useContext(EstadoUsersGlobal)
+    
 
     useEffect(() => {
         if(!localStorage.getItem('access'))
@@ -25,16 +25,11 @@ function Sidebar() {
     const handleSubmit = async () => {
         setLoading(true)
         setMessage()
-          try {
-            let res = await fetch(`http://127.0.0.1:8000/gestionar-informacion/`)
-            let data = await res.json()
-            setMessage(data.message)
+        
+            let data = await ProcessInformation()
+            setMessage(data)
             setLoading(false)
-          } catch (error) {
-            setMessage(error)
-            setLoading(false)
-            
-          }
+          
         
       }
 
@@ -72,12 +67,12 @@ function Sidebar() {
                         <div className='mt-3'>
                         <Button variant="outline-primary" size="lg" onClick={handleSubmit}>Procesar la información</Button>
                         <div className='mt-3' style={{ textAlign: "center" }}>{loading && <Loading></Loading>}</div>
-                        {message && <MyModal message={message}></MyModal> }
+                        {message && <MyModal message={message.message ? message.message : navigate('/Login')}></MyModal> }
                         </div>
                     </li>
                     <li className="mb-1 border-top">
                         <button className="btn btn-toggle align-items-center rounded mt-3 " style={{ color: 'blue' }} data-bs-toggle="collapse" data-bs-target="#dashboard-collapse2" aria-expanded="false">
-                            Usuario: {userContext.data}
+                            Usuario: {localStorage.getItem('username')}
                         </button>
                         <div className="collapse" id="dashboard-collapse2">
                             <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">

@@ -13,7 +13,7 @@ import Signin from './Login/Signin'
 function App1(props) {
    
     return (
-        <ContextUser>
+        
             <BrowserRouter>
              <Routes>
                     <Route  path="rateControl" element={<RateControl />} />
@@ -24,7 +24,7 @@ function App1(props) {
                     <Route  path="Login" element={<Signin />} />
                 </Routes>
             </BrowserRouter>
-        </ContextUser>
+        
     )
 }
 export default App1
